@@ -1,7 +1,7 @@
 package main
 
 
-
+import "fmt"
 
 
 
@@ -19,7 +19,8 @@ func main(){
 			 3:"mapas",
 		 },	 
 	 }
-	 
-	 Go.imprimirclases()
+	 (&Go).cambiarprecio(100.66)
+	 fmt.Println(Go.precio)
+
 
 }
