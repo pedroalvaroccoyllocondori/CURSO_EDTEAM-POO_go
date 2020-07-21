@@ -11,6 +11,15 @@ type curso struct{
 	idusuarios []uint
 	clases map[uint]string
 
+
+}
+
+func (instancia curso) imprimirclases(){// metodo perteneciente a la clase curso
+	texto:="las clases son : "
+	for _, valor := range instancia.clases{
+		texto+= valor +", "
+	}
+	fmt.Println(texto[:len(texto)-2])//metodo para borrar la ultima coma en el programa
 }
 
 func main(){
@@ -26,32 +35,7 @@ func main(){
 			 3:"mapas",
 		 },	 
 	 }
-	 //instancia sin especificar atributos
-	 Css := curso{
-		// no es necesario incluir ellnombre de los campos
-		"css desde cero",
-		68.05,
-		false,
-		[]uint{01,02,03},
-	    map[uint]string{
-			1:"introducion",
-			2:"estructuras",
-			3:"mapas",
-		},	 
-	}
-// instancia de una linea
-	java :=curso{nombre:"java",esgratis:true}
-// instancia sin argumentos
-	python :=curso{}
-	python.nombre="phthon desde cero"
-	python.idusuarios=[]uint{01,02}
-
-
-	fmt.Println(Go.nombre)
-	fmt.Println(Css.nombre)
-	fmt.Printf("%+v\n",java)
-	fmt.Printf("%+v\n",python)
-
-	
+	 
+	 Go.imprimirclases()
 
 }
