@@ -1,21 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/pedroalvaroccoyllocondori/POO_go/cursos/cursos"
+)
 
 func main() {
 	//instancia especificando los atributos
-	Go := curso{
-		nombre:     "javascrip desde cero",
-		precio:     68.05,
-		esgratis:   false,
-		idusuarios: []uint{01, 02, 03},
-		clases: map[uint]string{
+	Go := &cursos.Curso{
+		Nombre:     "javascrip desde cero",
+		Precio:     68.05,
+		Esgratis:   false,
+		Idusuarios: []uint{01, 02, 03},
+		Clases: map[uint]string{
 			1: "introducion",
 			2: "estructuras",
 			3: "mapas",
 		},
 	}
-	(&Go).cambiarprecio(100.66)
-	fmt.Println(Go.precio)
+	(Go).Cambiarprecio(100.66)
+	fmt.Println(Go.Precio)
 
 }
