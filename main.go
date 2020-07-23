@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/pedroalvaroccoyllocondori/POO_go/cursos/cursos"
+	"github.com/pedroalvaroccoyllocondori/POO_go"
 )
 
 func main() {
