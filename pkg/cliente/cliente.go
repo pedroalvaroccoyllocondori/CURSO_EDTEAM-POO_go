@@ -7,5 +7,5 @@ type Cliente struct {
 }
 
 func Nuevo(nombre, direccion, telefono string) Cliente {
-	return Cliente{nombre, direccion, telefono}
+	return Cliente{nombre, direccion, telefono} // se inicializan los parametros
 }
