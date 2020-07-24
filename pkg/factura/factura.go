@@ -11,12 +11,12 @@ type Factura struct {
 	ciudad string
 	total  float64
 	client cliente.Cliente
-	item   []idfactura.Item // los corchetes me indica relacion de 1a  muchos
+	item   idfactura.Itemsss // los corchetes me indica relacion de 1a  muchos
 	//creando un slice de  id fatura
 }
 
 // funcion constructora de  la estructura (clase)
-func Nuevo(pais, ciudad string, client cliente.Cliente, item []idfactura.Item) Factura {
+func Nuevo(pais, ciudad string, client cliente.Cliente, item idfactura.Itemsss) Factura {
 
 	return Factura{
 		pais:   pais,
@@ -29,8 +29,5 @@ func Nuevo(pais, ciudad string, client cliente.Cliente, item []idfactura.Item) F
 //inicializador del atributo total
 
 func (instancia *Factura) Establecertotal() { //* para actualizar el valor
-	for _, item := range instancia.item {
-		instancia.total += item.Valor()
-
-	}
+	instancia.total = instancia.item.Total()
 }
