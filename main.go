@@ -2,24 +2,32 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/cliente"
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/factura"
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/idfactura"
 )
+
+type curso struct {
+	nombre string
+}
+
+func (instancia curso) Imprimir() {
+	fmt.Printf("%+v\n", instancia)
+}
+
+//declaracion de alias de tipo
+type MyAlias = curso //hereda los atributos y metodos
+
+//definicion de tipo
+type NuevoCurso curso // no hereda loa atributos y metodos
 
 func main() {
 
-	objeto := factura.Nuevo(
-		"peru",
-		"ica",
-		cliente.Nuevo("alvaro", "ica", "917186613"),
-		[]idfactura.Item{
-			idfactura.Nuevo(01, "curso de git", 12.3),
-			idfactura.Nuevo(02, "curso de android", 12.3),
-			idfactura.Nuevo(03, "curso de go", 67.3),
-		},
-	)
-	objeto.Establecertotal()
-	fmt.Printf("%+v", objeto)
+	//declaracion de alias
+	objeto := MyAlias{nombre: "java"}
+	objeto.Imprimir()
+	fmt.Printf("el tipo es %T\n", objeto) //tipo de dato
+
+	// declaracion de  definicion de tipo
+	objeto1 := NuevoCurso{nombre: "git"}
+	//objeto1.Imprimir()
+	fmt.Printf("el tipo es %T\n", objeto1) //tipo de dato
+
 }
