@@ -12,6 +12,12 @@ type Despedidor interface {
 	Despedidor()
 }
 
+//embeber interfases en una sola
+type SaludadorDespedidor interface {
+	Saludador
+	Despedidor
+}
+
 //creacion de la estructura persona
 type Persona struct {
 	Nombre string
@@ -38,16 +44,11 @@ func (referencia Texto) Despedidor() {
 
 }
 
-//funcion que solo funciona con la interfase saludador()
-func SaludadoraTodos(referenciass ...Saludador) { //esta funcion solo permite almacenar los
-	//tipos de datos que tengan esta interfaz
+//funcion que implemeta la interfaz embebida
+func SaludadorDespedidorTodos(referenciass ...SaludadorDespedidor) {
+
 	for _, valor := range referenciass {
 		valor.Saludador()
-	}
-}
-func DespedidoraaTodos(referenciass ...Despedidor) { //esta funcion solo permite almacenar los
-	//tipos de datos que tengan esta interfaz
-	for _, valor := range referenciass {
 		valor.Despedidor()
 	}
 }
@@ -57,7 +58,6 @@ func main() {
 
 	var texto Texto = "Juan"
 
-	SaludadoraTodos(estructura, texto)
-	DespedidoraaTodos(estructura, texto)
+	SaludadorDespedidorTodos(estructura, texto)
 
 }
