@@ -30,18 +30,8 @@ func (referencia Persona) Saludador() {
 func (referencia Persona) Despedidor() {
 	fmt.Printf("adios soy un %s \n", referencia.Nombre)
 }
-
-//cracion del  tipo Texto a partir de string
-type Texto string
-
-// implementacion de la intefaz
-func (referencia Texto) Saludador() {
-	fmt.Printf("hola soy un %s \n ", referencia)
-
-}
-func (referencia Texto) Despedidor() {
-	fmt.Printf("adios soy un %s \n", referencia)
-
+func (referencia Persona) String() string { //implemetar una interfaz predeterminada
+	return " hola sou un humano y mi nombre es :" + referencia.Nombre
 }
 
 //funcion que implemeta la interfaz embebida
@@ -55,9 +45,5 @@ func SaludadorDespedidorTodos(referenciass ...SaludadorDespedidor) {
 
 func main() {
 	estructura := Persona{Nombre: "alvaro"}
-
-	var texto Texto = "Juan"
-
-	SaludadorDespedidorTodos(estructura, texto)
-
+	fmt.Println(estructura)
 }
