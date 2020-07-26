@@ -7,30 +7,48 @@ type Saludador interface {
 	Saludador()
 }
 
-//creacion de una estructura
+//creacion de interfase Despedidor
+type Despedidor interface {
+	Despedidor()
+}
+
+//creacion de la estructura persona
 type Persona struct {
 	Nombre string
 }
 
 // implemetacion de la interfaz
 func (referencia Persona) Saludador() {
-	fmt.Printf("hola soy una %s", referencia.Nombre)
+	fmt.Printf("hola soy una %s \n", referencia.Nombre)
+}
+func (referencia Persona) Despedidor() {
+	fmt.Printf("adios soy un %s \n", referencia.Nombre)
 }
 
-//cracion de otro tipo
+//cracion del  tipo Texto a partir de string
 type Texto string
 
 // implementacion de la intefaz
 func (referencia Texto) Saludador() {
-	fmt.Printf("hola soy un %s ", referencia)
+	fmt.Printf("hola soy un %s \n ", referencia)
+
+}
+func (referencia Texto) Despedidor() {
+	fmt.Printf("adios soy un %s \n", referencia)
 
 }
 
+//funcion que solo funciona con la interfase saludador()
 func SaludadoraTodos(referenciass ...Saludador) { //esta funcion solo permite almacenar los
 	//tipos de datos que tengan esta interfaz
 	for _, valor := range referenciass {
 		valor.Saludador()
-		fmt.Printf("\t valor :%v , tipo :%T \n", valor, valor)
+	}
+}
+func DespedidoraaTodos(referenciass ...Despedidor) { //esta funcion solo permite almacenar los
+	//tipos de datos que tengan esta interfaz
+	for _, valor := range referenciass {
+		valor.Despedidor()
 	}
 }
 
@@ -40,5 +58,6 @@ func main() {
 	var texto Texto = "Juan"
 
 	SaludadoraTodos(estructura, texto)
+	DespedidoraaTodos(estructura, texto)
 
 }
