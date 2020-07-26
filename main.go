@@ -26,13 +26,19 @@ func (referencia Texto) Saludador() {
 
 }
 
+func SaludadoraTodos(referenciass ...Saludador) { //esta funcion solo permite almacenar los
+	//tipos de datos que tengan esta interfaz
+	for _, valor := range referenciass {
+		valor.Saludador()
+		fmt.Printf("\t valor :%v , tipo :%T \n", valor, valor)
+	}
+}
+
 func main() {
-	var estructura Saludador = Persona{Nombre: "alvaro"}
-	estructura.Saludador()
+	estructura := Persona{Nombre: "alvaro"}
 
-	fmt.Println("")
+	var texto Texto = "Juan"
 
-	var texto Saludador = Texto("Juan")
-	texto.Saludador()
+	SaludadoraTodos(estructura, texto)
 
 }
