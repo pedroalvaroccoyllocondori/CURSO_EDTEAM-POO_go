@@ -1,46 +1,40 @@
 package main
 
-import (
-	"fmt"
-<<<<<<< HEAD
-)
+import "fmt"
 
-type NuevoBoleano bool //definiciones de nuevos tipos  con base en tipos predeclarados
+// creacion de la  clase persona
+type Persona struct {
+	Nombre string
+	Edad   uint
+}
 
-func (referencia NuevoBoleano) Cadena() string {
-	if referencia {
-		return "VERDADERO"
-	} else {
-		return "FALSO"
-	}
+func NuevaPersona(nombre string, edad uint) Persona {
+	return Persona{nombre, edad}
+}
+
+func (referncia Persona) Saludo() {
+	fmt.Println("hola a todos")
+}
+
+// creacion de la estructura empleado a partir de persona
+type Empleado struct {
+	Persona // embebemos  la clase persona y automaticamente  hereda todo los atributos y metodos
+	// el receptor de esos metodos sera el tipo interno
+	sueldo float64
+}
+
+func NuevoEmpleado(nombre string, edad uint, sueldo float64) Empleado {
+	return Empleado{NuevaPersona(nombre, edad), sueldo}
+}
+func (instancia Empleado) Honorario() {
+	fmt.Println(instancia.sueldo * 0.9)
 }
 
 func main() {
 
-	var boleano NuevoBoleano = false
+	empleado := NuevoEmpleado("juan", 25, 960)
+	fmt.Println(empleado.Nombre, empleado.Edad)
+	empleado.Saludo()
+	empleado.Honorario()
 
-	fmt.Println(boleano.Cadena())
-=======
-
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/cliente"
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/factura"
-	"github.com/pedroalvaroccoyllocondori/POO_go/pkg/idfactura"
-)
-
-func main() {
-
-	objeto := factura.Nuevo(
-		"peru",
-		"ica",
-		cliente.Nuevo("alvaro", "ica", "917186613"),
-
-		idfactura.NuevoItems(
-			idfactura.Nuevo(01, "curso de git", 12.3),
-			idfactura.Nuevo(02, "curso de android", 12.3),
-			idfactura.Nuevo(03, "curso de go", 67.3),
-		),
-	)
-	objeto.Establecertotal()
-	fmt.Printf("%+v", objeto)
->>>>>>> desarrollo
 }
