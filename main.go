@@ -1,49 +1,40 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//creacion de interfaz con metodo
-type Saludador interface {
-	Saludador()
+//creacion de interfases
+type SetterGetter interface {
+	Obtener() string
+	Establecer(string)
 }
 
-//creacion de interfase Despedidor
-type Despedidor interface {
-	Despedidor()
-}
-
-//embeber interfases en una sola
-type SaludadorDespedidor interface {
-	Saludador
-	Despedidor
-}
-
-//creacion de la estructura persona
+// creacion de una estructura
 type Persona struct {
-	Nombre string
+	nombre string
 }
 
-// implemetacion de la interfaz
-func (referencia Persona) Saludador() {
-	fmt.Printf("hola soy una %s \n", referencia.Nombre)
+func NuevaPersona(nombre string) Persona {
+	return Persona{nombre}
+
 }
-func (referencia Persona) Despedidor() {
-	fmt.Printf("adios soy un %s \n", referencia.Nombre)
+func (referencia Persona) Obtener() string {
+	return referencia.nombre
 }
-func (referencia Persona) String() string { //implemetar una interfaz predeterminada
-	return " hola sou un humano y mi nombre es :" + referencia.Nombre
+func (referencia *Persona) Establecer(nombre string) { //receptor de tipo puntero para actualizar la informacion
+	referencia.nombre = nombre
 }
 
-//funcion que implemeta la interfaz embebida
-func SaludadorDespedidorTodos(referenciass ...SaludadorDespedidor) {
-
-	for _, valor := range referenciass {
-		valor.Saludador()
-		valor.Despedidor()
-	}
+// funcion que  que recibe una instancia que tiene los metodos de la intefaz
+func Executar(instancia SetterGetter, nombre string) {
+	instancia.Establecer(nombre)
+	fmt.Println(instancia.Obtener())
 }
-
 func main() {
-	estructura := Persona{Nombre: "alvaro"}
-	fmt.Println(estructura)
+
+	persona := NuevaPersona("juan") // instanciando un objeto
+
+	//Executar(persona, "alvaro") // no se puede ejecutara ya qq el emtodo tipo puntero no implemta todos losa metodos de la intefaz
+	Executar(&persona, "alvaro")
 }
