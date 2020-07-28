@@ -4,37 +4,55 @@ import (
 	"fmt"
 )
 
-//creacion de interfases
-type SetterGetter interface {
-	Obtener() string
-	Establecer(string)
+type MetodoPago interface {
+	Pagar()
 }
 
-// creacion de una estructura
-type Persona struct {
-	nombre string
+type Paypal struct{}
+
+func (referencia Paypal) Pagar() { // implemtacion de la interfaz
+	fmt.Println("pagado por paypal")
 }
 
-func NuevaPersona(nombre string) *Persona { //hacer que el contructor reciba un puntero y devuelva un apuntador
-	return &Persona{nombre}
+type Tarjeta struct{}
 
-}
-func (referencia *Persona) Obtener() string { //receptor de tipo puntero para actualizar la informacion
-	return referencia.nombre
-}
-func (referencia *Persona) Establecer(nombre string) { //receptor de tipo puntero para actualizar la informacion
-	referencia.nombre = nombre
+func (referencia Tarjeta) Pagar() { // implemtacion de la interfaz
+	fmt.Println("pagado  con tarjeta")
 }
 
-// funcion que  que recibe una instancia que tiene los metodos de la intefaz
-func Executar(instancia SetterGetter, nombre string) {
-	instancia.Establecer(nombre)
-	fmt.Println(instancia.Obtener())
+type Efectivo struct{}
+
+func (referencia Efectivo) Pagar() { // implemtacion de la interfaz
+	fmt.Println("pagado por  efectivo")
 }
+
+func Cajero(tipopago uint) MetodoPago { // metodo que devuelve una interfaz
+	switch tipopago {
+	case 1:
+		return Paypal{}
+	case 2:
+		return Tarjeta{}
+	case 3:
+		return Efectivo{}
+	default:
+		return nil
+
+	}
+}
+
 func main() {
 
-	persona := NuevaPersona("juan") // instanciando un objeto
+	var metodo uint // declaracion de la variable
+	fmt.Println("digite el metodo de pago \n 1: paypal \n 2: tarjeta \n 3: efectivo")
+	_, error := fmt.Scanln(&metodo)
+	if error != nil { // si se inserta letra
+		panic("debes diguitar un numero entre 1 y 3 y no letras")
+	}
+	if metodo > 3 { // si se insert numeros mayores a 3
+		panic("debes diguitar un numero entre 1 y 3 y no mayores a ese rango")
+	}
 
-	//Executar(persona, "alvaro") // no se puede ejecutara ya qq el emtodo tipo puntero no implemta todos losa metodos de la intefaz
-	Executar(persona, "alvaro")
+	metodopago := Cajero(metodo) //el metodo devuelve una interfaz
+	metodopago.Pagar()
+
 }
