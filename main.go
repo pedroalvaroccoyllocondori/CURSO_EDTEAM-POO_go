@@ -15,11 +15,11 @@ type Persona struct {
 	nombre string
 }
 
-func NuevaPersona(nombre string) Persona {
-	return Persona{nombre}
+func NuevaPersona(nombre string) *Persona { //hacer que el contructor reciba un puntero y devuelva un apuntador
+	return &Persona{nombre}
 
 }
-func (referencia Persona) Obtener() string {
+func (referencia *Persona) Obtener() string { //receptor de tipo puntero para actualizar la informacion
 	return referencia.nombre
 }
 func (referencia *Persona) Establecer(nombre string) { //receptor de tipo puntero para actualizar la informacion
@@ -36,5 +36,5 @@ func main() {
 	persona := NuevaPersona("juan") // instanciando un objeto
 
 	//Executar(persona, "alvaro") // no se puede ejecutara ya qq el emtodo tipo puntero no implemta todos losa metodos de la intefaz
-	Executar(&persona, "alvaro")
+	Executar(persona, "alvaro")
 }
