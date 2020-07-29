@@ -10,15 +10,18 @@ type ejemplo interface {
 }
 
 func envoltura(interfaz interface{}) { //metodo que recibe una interfaz vacia
-	fmt.Printf("valor :%v tipo:%T \n", interfaz, interfaz)
-	//validar el tipo de  interfaz que ingresa al metodo
 
-	valor, ok := interfaz.(string) //guardando  y validando el valor y el error que producen
-	if ok {
+	switch valor := interfaz.(type) {
+	case string:
 		fmt.Printf("\t%s\n", strings.ToUpper(valor))
+	case int:
+		fmt.Println(valor * 5)
+	default:
+		fmt.Printf("valor :%v tipo:%T \n", interfaz, interfaz)
+		//validar el tipo de  interfaz que ingresa al metodo
+
 	}
 }
-
 func main() {
 
 	//var ejemplar ejemplo // declarando una interfaz nula (ninguna clase a implementado ese metodo)
