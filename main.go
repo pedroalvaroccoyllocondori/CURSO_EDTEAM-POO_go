@@ -9,6 +9,11 @@ func ejecutar(nombre string, funcion func(string)) {
 func main() {
 
 	nombre := "golan en español"
-	ejecutar(nombre, funciones.Saludar)
-	ejecutar(nombre, funciones.Despedirse)
+	//envolviendo las funciones en una variable
+	saludarConLog := funciones.MiddlewareLog(funciones.Saludar)
+	despedirseConLog := funciones.MiddlewareLog(funciones.Despedirse)
+
+	//imprimiendo los valores
+	ejecutar(nombre, saludarConLog)
+	ejecutar(nombre, despedirseConLog)
 }
