@@ -5,10 +5,17 @@ import (
 	"time"
 )
 
+//tipo de dato funcion
+type Mifuncion func(string)
+
 // funcion decoradora que  recibe una funcion le agrega  funcionalidad  y devuelve una funcion
-func MiddlewareLog(funcion func(string)) func(string) {
+
+// funcion que devuelve un tipo de dato Mifuncion
+func MiddlewareLog(funcion func(string)) Mifuncion {
 	return func(nombre string) {
-		fmt.Println(time.Now().Format("2006-01-02 15:04:05")) // funcionalidad agregada a la funcion
+		fmt.Println("inicio", time.Now().Format("2006-01-02 15:04:05")) // funcionalidad agregada a la funcion
 		funcion(nombre)
+		fmt.Println("fin", time.Now().Format("2006-01-02 15:04:05")) // funcionalidad agregada a la funcion
+
 	}
 }
